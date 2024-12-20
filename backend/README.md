@@ -44,3 +44,5 @@ pnpm install
 ```sh
 pnpm run dev
 ```
+
+4. Have fun
