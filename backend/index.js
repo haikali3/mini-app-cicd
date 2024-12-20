@@ -26,6 +26,11 @@ sequelize.sync();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Add endpoint / for hello world
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
 // CRUD routes for User model
 app.get('/users', async (req, res) => {
   const users = await User.findAll();

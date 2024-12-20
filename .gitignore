@@ -26,3 +26,5 @@ express-session/
 
 # Vue.js local dev server
 dist/
+
+.DS_Store
