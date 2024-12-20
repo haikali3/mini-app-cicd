@@ -1,0 +1,28 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+.env.production
+.env.development
+
+# Nuxt.js build output
+.nuxt/
+
+# Express.js specific
+express-session/
+
+# SQLite database files
+*.sqlite
+*.sqlite3
+
+# Vue.js local dev server
+dist/
