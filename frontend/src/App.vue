@@ -1,17 +1,42 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import UserForm from './components/UserForm.vue';
+import UserList from './components/UserList.vue';
+
+export default {
+  components: {
+    UserForm,
+    UserList,
+  },
+  data() {
+    return {
+      users: [],
+    };
+  },
+  methods: {
+    async fetchUsers() {
+      try {
+        const response = await fetch('http://localhost:3000/users');
+        if (!response.ok) {
+          throw new Error(`Error fetching users: ${response.statusText}`);
+        }
+        this.users = await response.json();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  mounted() {
+    this.fetchUsers();
+  },
+};
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app">
+    <h1>User Management</h1>
+    <UserForm @refresh="fetchUsers" />
+    <UserList :users="users" @refresh="fetchUsers" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
