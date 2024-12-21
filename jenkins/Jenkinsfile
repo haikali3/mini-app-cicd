@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        git 'Default Git'
+    }
+
     environment {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         JENKINS_PORT = '8080'
