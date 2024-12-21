@@ -29,17 +29,11 @@ docker compose up --build
 
 3. Access the application:
 
-- Frontend: [http://localhost:8000](http://localhost:8000)
+- Frontend: [http://localhost:8080](http://localhost:8080)
 - Backend: [http://localhost:3000](http://localhost:3000)
 
 4. Stop the services:
 
 ```sh
 docker compose down
-```
-
-5. Use Jenkins
-
-```sh
-docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
