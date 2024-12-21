@@ -1,17 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 const app = express();
 const port = 3000;
 
-// Create Sequelize instance
+// later can configure cors to be specific origins
+app.use(cors());
+
+// create Sequelize instance
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './database.sqlite'
 });
 
-// Define User model
+// define User model
 class User extends Model {}
 User.init({
   name: DataTypes.STRING,
@@ -19,19 +23,17 @@ User.init({
   password: DataTypes.STRING
 }, { sequelize, modelName: 'user' });
 
-// Sync models with database
+// sync models with database
 sequelize.sync();
 
-// Middleware for parsing request body
+// middleware for parsing request body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Add endpoint / for hello world
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-// CRUD routes for User model
 app.get('/users', async (req, res) => {
   const users = await User.findAll();
   res.json(users);
