@@ -3,6 +3,10 @@ pipeline {
 
     environment {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        JENKINS_PORT = '8080'
+        JENKINS_AGENT_PORT = '50000'
+        BACKEND_PORT = '3000'
+        FRONTEND_PORT = '8000'
     }
 
     stages {
