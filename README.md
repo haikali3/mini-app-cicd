@@ -4,8 +4,7 @@ This is the Mini App, which includes a Node.js backend with SQLite and a Vue.js 
 
 ## Prerequisites
 
-- Docker
-- Docker Compose
+- Docker Desktop
 - Node.js (version 22.12.0)
 - pnpm
 
@@ -23,7 +22,7 @@ cd mini-app-cicd
 2. Start the services with Docker Compose:
 
 ```sh
-docker-compose up --build
+docker compose up --build
 ```
 
 - The `--build` flag is used to build the images before starting the services.
@@ -36,5 +35,5 @@ docker-compose up --build
 4. Stop the services:
 
 ```sh
-docker-compose down
+docker compose down
 ```
