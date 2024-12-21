@@ -15,7 +15,7 @@ export default {
   methods: {
     async fetchUsers() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users`);
+        const response = await fetch('http://localhost:3001/users');
         if (!response.ok) {
           throw new Error(`Error fetching users: ${response.statusText}`);
         }
@@ -29,8 +29,6 @@ export default {
     this.fetchUsers();
   },
 };
-
-console.log(import.meta.env.VITE_BACKEND_URL);
 </script>
 
 <template>

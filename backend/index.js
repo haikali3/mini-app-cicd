@@ -4,7 +4,7 @@ const cors = require('cors');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // later can configure cors to be specific origins
 app.use(cors());
