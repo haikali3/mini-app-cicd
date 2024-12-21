@@ -33,14 +33,31 @@ pipeline {
         stage('Test Backend') {
             steps {
                 script {
-                    // Run backend container and test API
+                    echo "Testing backend container..."
                     sh '''
+                    # Stop and remove the existing container if it exists
+                    docker ps --filter "name=backend-test" -q | xargs -r docker stop
+                    
+                    # Run the backend container
                     docker run -d --rm --name backend-test -p 3000:3000 mini-app-cicd_backend
-                    sleep 15
+                    
+                    # Allow the container to start
+                    sleep 10
+                    
+                    # Fetch and display container logs for debugging
                     docker logs backend-test || echo "No logs available"
-                    curl -f http://localhost:3000 || exit 1
+                    
+                    # Test the backend endpoint
+                    curl -f http://localhost:3000 || {
+                        echo "Backend service did not respond on port 3000."
+                        docker stop backend-test
+                        exit 1
+                    }
+                    
+                    # Stop the container after testing
                     docker stop backend-test
                     '''
+                    echo "Backend container tested successfully."
                 }
             }
         }
