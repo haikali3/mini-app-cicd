@@ -31,7 +31,7 @@ pipeline {
                 script {
                     // Run backend container and test API
                     sh '''
-                    docker run -d --rm --name backend-test -p 3000:3000 haikali3/mini-app-cicd_backend
+                    docker run -d --rm --name backend-test -p 3000:3000 mini-app-cicd_backend
                     sleep 5
                     curl -f http://localhost:3000 || exit 1
                     docker stop backend-test
@@ -45,7 +45,7 @@ pipeline {
                 script {
                     // Run frontend container and test HTTP access
                     sh '''
-                    docker run -d --rm --name frontend-test -p 8000:80 haikali3/mini-app-cicd_frontend
+                    docker run -d --rm --name frontend-test -p 8000:80 mini-app-cicd_frontend
                     sleep 5
                     curl -f http://localhost:8000 || exit 1
                     docker stop frontend-test
