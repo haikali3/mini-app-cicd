@@ -36,7 +36,8 @@ pipeline {
                     // Run backend container and test API
                     sh '''
                     docker run -d --rm --name backend-test -p 3000:3000 mini-app-cicd_backend
-                    sleep 5
+                    sleep 15
+                    docker logs backend-test || echo "No logs available"
                     curl -f http://localhost:3000 || exit 1
                     docker stop backend-test
                     '''
