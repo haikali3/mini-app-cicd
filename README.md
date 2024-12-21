@@ -1,50 +1,40 @@
-# Mini App Backend
+# Mini App CI/CD
 
-This is the backend for the Mini App, built with Node.js and SQLite.
+This is the Mini App, which includes a Node.js backend with SQLite and a Vue.js frontend. The application is containerized using Docker, and Docker Compose is used to manage both services.
 
 ## Prerequisites
 
 - Docker
+- Docker Compose
 - Node.js (version 22.12.0)
 - pnpm
 
 ## Getting Started
-
-### Running with Docker
-
-1. Build the Docker image:
-
-```sh
-docker build -t haikali3/mini-app-backend .
-docker build -t haikali3/mini-app-frontend .
-```
-
-2. Run the Docker container:
-
-```sh
-docker run -p 3000:3000 haikali3/mini-app-backend
-docker run -p 8000:80 haikali3/mini-app-frontend
-```
 
 ### Running Locally
 
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/yourusername/mini-app-backend.git
-cd mini-app-backend
+git clone https://github.com/yourusername/mini-app-cicd.git
+cd mini-app-cicd
 ```
 
-2. Install dependencies:
+2. Start the services with Docker Compose:
 
 ```sh
-pnpm install
+docker-compose up --build
 ```
 
-3. Start the application:
+- The `--build` flag is used to build the images before starting the services.
+
+3. Access the application:
+
+- Frontend: [http://localhost:8080](http://localhost:8080)
+- Backend: [http://localhost:3000](http://localhost:3000)
+
+4. Stop the services:
 
 ```sh
-pnpm run dev
+docker-compose down
 ```
-
-4. Have fun
