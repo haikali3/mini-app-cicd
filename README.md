@@ -42,4 +42,6 @@ docker compose down
 
 ```sh
 docker exec -it jenkins-container-id bash
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
 ```
