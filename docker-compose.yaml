@@ -1,12 +1,23 @@
 version: '3.8'
 
 services:
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    ports:
+      - "${JENKINS_PORT}:8080"
+      - "${JENKINS_AGENT_PORT}:50000"
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "${BACKEND_PORT}:3000"
     environment:
       - NODE_ENV=production
   
@@ -15,8 +26,11 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "${FRONTEND_PORT}:80"
     depends_on:
       - backend
     environment:
       - NODE_ENV=production
+
+volumes:
+  jenkins-data:
