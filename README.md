@@ -15,13 +15,15 @@ This is the backend for the Mini App, built with Node.js and SQLite.
 1. Build the Docker image:
 
 ```sh
-docker build -t mini-app-backend .
+docker build -t haikali3/mini-app-backend .
+docker build -t haikali3/mini-app-frontend .
 ```
 
 2. Run the Docker container:
 
 ```sh
-docker run -p 3000:3000 mini-app-backend
+docker run -p 3000:3000 haikali3/mini-app-backend
+docker run -p 8000:80 haikali3/mini-app-frontend
 ```
 
 ### Running Locally

@@ -1,12 +1,10 @@
-FROM alpine:3.21
+# Stage 1: Build State
+FROM alpine:3.21 AS builder
 
 ENV NODE_VERSION 22.12.0
 
 # Set working directory
 WORKDIR /usr/src/app
-
-# Install build tools for sqlite3
-RUN apk add --no-cache sqlite sqlite-dev
 
 # Install Node.js, npm, and pnpm
 RUN apk add --no-cache nodejs npm \
@@ -21,8 +19,17 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the application code
 COPY . .
 
-# Expose the application port
-EXPOSE 3000
+# Build the application
+RUN pnpm run build
 
-# Start the application
-CMD ["pnpm", "run", "dev"]
+# Stage 2: Serve Stage
+FROM nginx:1.21.3-alpine
+
+# Copy the build output to the nginx directory
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+
+# Expose the application port
+EXPOSE 80
+
+# Start nginx server
+CMD ["nginx", "-g", "daemon off;"]
